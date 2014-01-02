@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+import de.ecotastic.android.camerautil.R;
 import de.ecotastic.android.camerautil.lib.CameraIntentHelperActivity;
 import de.ecotastic.android.camerautil.util.BitmapHelper;
-import de.ecotastic.androidcamerautil.R;
 
 /**
  * Example Activity of how to use the CameraIntentHelperActivity
  * 
- * @author Ralf Gehrer <ralf@ecotastic.de>d
+ * @author Ralf Gehrer <ralf@ecotastic.de>
  */
 public class TakePhotoActivity extends CameraIntentHelperActivity {
 

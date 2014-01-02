@@ -16,8 +16,8 @@ import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.Toast;
+import de.ecotastic.android.camerautil.R;
 import de.ecotastic.android.camerautil.util.DateParser;
-import de.ecotastic.androidcamerautil.R;
 
 /**
  * A helper Activity to start the camera activity and retrieve the location 
