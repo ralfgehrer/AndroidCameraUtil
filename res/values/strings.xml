@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Camera Util</string>
+    
+    <string name="error_sd_card_not_mounted">External storage is required. Your SD card is most likely not mounted.</string>
+	<string name="error_could_not_take_photo">There was an issue with your camera. We are very sorry for the inconvenience!</string>
+	
+	<string name="acitvity_take_photo_start_camera_button">Take a picture!</string>
+</resources>
