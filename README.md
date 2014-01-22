@@ -38,6 +38,7 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * Samsung Galaxy Young Duos (gt-s6312)
 * Samsung Galaxy Mini (gt-s6500)
 * Samsung Galaxy Note 3 (sm-n9005)
+* Samsung Galaxy Nexus
 * Sony Xperia Z (c6603)
 * Sony Xperia Go (st27i)
 * Sony Ericsson Xperia S (lt26i)
@@ -45,6 +46,6 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 
 
 
-Please feel free to check out the code. _CameraIntentHelperActivity_ provides the main functionality.
+Please feel free to check out the code. [CameraIntentHelperActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/src/de/ecotastic/android/camerautil/lib/CameraIntentHelperActivity.java) provides the main functionality.
 
-_TakePhotoActivity_ is an example Activitiy on how to use the CameraIntentHelperActivity.
+[TakePhotoActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/src/de/ecotastic/android/camerautil/example/TakePhotoActivity.java) is an example Activitiy on how to use the CameraIntentHelperActivity.

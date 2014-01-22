@@ -19,6 +19,14 @@
         android:id="@+id/acitvity_take_photo_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/acitvity_take_photo_image_view_desc"
         android:layout_below="@+id/acitvity_take_photo_start_camera_button"
         android:layout_centerHorizontal="true" />    
+        
+    <TextView 
+        android:id="@+id/acitvity_take_photo_image_uri" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/acitvity_take_photo_image_view"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

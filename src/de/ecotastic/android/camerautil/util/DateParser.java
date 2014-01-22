@@ -1,5 +1,6 @@
 package de.ecotastic.android.camerautil.util;
 
+import android.annotation.SuppressLint;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,7 @@ import java.util.TimeZone;
  * 
  * @author Ralf Gehrer <ralf@ecotastic.de>
  */
+@SuppressLint("SimpleDateFormat")
 public class DateParser {
 	//ISO 8601 international standard date format
 	public final static String dateFormat = "yyyy-MM-dd HH:mm:ss.SSSZ";

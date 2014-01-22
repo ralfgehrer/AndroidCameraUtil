@@ -102,18 +102,24 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	protected void startCameraIntent() {
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 			try {
-				dateCameraIntentStarted = new Date();
-				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				// NOTE: Do NOT SET: intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraPicUri) 
 				// on Samsung Galaxy S2/S3/.. for the following reasons:
 				// 1.) it will break the correct picture orientation
 				// 2.) the photo will be stored in two locations (the given path and, additionally, in the MediaStore)
 				String manufacturer = android.os.Build.MANUFACTURER.toLowerCase(Locale.ENGLISH);
-				// String model = android.os.Build.MODEL.toLowerCase();
-				// if(model.contains("galaxy nexus") ||
-				// (!(manufacturer.contains("samsung")) &&
-				// !(manufacturer.contains("sony")))) {
+				String model = android.os.Build.MODEL.toLowerCase(Locale.ENGLISH);
+				boolean setPreDefinedCameraUri = false;
 				if (!(manufacturer.contains("samsung")) && !(manufacturer.contains("sony"))) {
+					setPreDefinedCameraUri = true;
+				}
+				if (manufacturer.contains("samsung") && model.contains("galaxy nexus")) {
+					setPreDefinedCameraUri = true;
+				}
+
+				
+				dateCameraIntentStarted = new Date();
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				if (setPreDefinedCameraUri) {
 					String filename = System.currentTimeMillis() + ".jpg";
 					ContentValues values = new ContentValues();
 					values.put(MediaStore.Images.Media.TITLE, filename);
@@ -121,7 +127,7 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 												MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
 												values);
 					intent.putExtra(MediaStore.EXTRA_OUTPUT, preDefinedCameraUri);
-				}
+				}				
 				startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 			} catch (ActivityNotFoundException e) {
 				logException(e);

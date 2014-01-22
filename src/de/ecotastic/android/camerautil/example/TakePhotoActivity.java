@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 import de.ecotastic.android.camerautil.R;
 import de.ecotastic.android.camerautil.lib.CameraIntentHelperActivity;
 import de.ecotastic.android.camerautil.util.BitmapHelper;
@@ -28,7 +28,8 @@ public class TakePhotoActivity extends CameraIntentHelperActivity {
 	
 	@Override
 	protected void onPhotoUriFound() {
-		Toast.makeText(this, "photo uri: " + photoUri.toString(), Toast.LENGTH_LONG).show();
+		TextView uirView = (TextView) findViewById(R.id.acitvity_take_photo_image_uri);
+		uirView.setText("photo uri: " + photoUri.toString());
 		
 		Bitmap photo = BitmapHelper.readBitmap(this, photoUri);
         if (photo != null) {
@@ -46,6 +47,7 @@ public class TakePhotoActivity extends CameraIntentHelperActivity {
 	@Override
 	protected void onPhotoUriNotFound() {
 		super.onPhotoUriNotFound();
-		Toast.makeText(this, getString(R.string.error_could_not_take_photo), Toast.LENGTH_LONG).show();
+		TextView uirView = (TextView) findViewById(R.id.acitvity_take_photo_image_uri);
+		uirView.setText("photo uri: not found");
 	}
 }
