@@ -108,6 +108,10 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				// 2.) the photo will be stored in two locations (the given path and, additionally, in the MediaStore)
 				String manufacturer = android.os.Build.MANUFACTURER.toLowerCase(Locale.ENGLISH);
 				String model = android.os.Build.MODEL.toLowerCase(Locale.ENGLISH);
+				String buildType = android.os.Build.TYPE.toLowerCase(Locale.ENGLISH);
+				String buildDevice = android.os.Build.DEVICE.toLowerCase(Locale.ENGLISH);
+				String buildId = android.os.Build.ID.toLowerCase(Locale.ENGLISH);
+				
 				boolean setPreDefinedCameraUri = false;
 				if (!(manufacturer.contains("samsung")) && !(manufacturer.contains("sony"))) {
 					setPreDefinedCameraUri = true;
@@ -115,6 +119,29 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				if (manufacturer.contains("samsung") && model.contains("galaxy nexus")) {
 					setPreDefinedCameraUri = true;
 				}
+				if (manufacturer.contains("samsung") && model.contains("gt-n7000") && buildId.contains("imm76l")) {
+					setPreDefinedCameraUri = true;
+				}
+				
+				if (buildType.contains("userdebug") && buildDevice.contains("ariesve")) {  //TESTED
+					setPreDefinedCameraUri = true;
+				}
+				if (buildType.contains("userdebug") && buildDevice.contains("crespo")) {   //TESTED
+					setPreDefinedCameraUri = true;
+				}
+				
+				///////////////////////////////////////////////////////////////////////////
+				// TEST: CyanogenMod
+				if (buildType.contains("userdebug") && buildDevice.contains("cooper")) {
+					setPreDefinedCameraUri = true;
+				}
+				if (buildType.contains("userdebug") && buildDevice.contains("t0lte")) {
+					setPreDefinedCameraUri = true;
+				}
+				if (buildType.contains("userdebug") && buildDevice.contains("gt-i9100")) {
+					setPreDefinedCameraUri = true;
+				}
+				///////////////////////////////////////////////////////////////////////////
 
 				
 				dateCameraIntentStarted = new Date();
