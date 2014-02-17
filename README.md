@@ -76,7 +76,7 @@ With regards to custom Roms, the code  was _successfully_ tested on the followin
 * Samsung Galaxy S Plus (gt-i9001)
 
 
+
 Please feel free to check out the code. [CameraIntentHelperActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/src/de/ecotastic/android/camerautil/lib/CameraIntentHelperActivity.java) provides the main functionality.
 
 [TakePhotoActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/src/de/ecotastic/android/camerautil/example/TakePhotoActivity.java) is an example Activitiy on how to use the CameraIntentHelperActivity.
-* HTC One S
