@@ -111,15 +111,16 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				String buildType = android.os.Build.TYPE.toLowerCase(Locale.ENGLISH);
 				String buildDevice = android.os.Build.DEVICE.toLowerCase(Locale.ENGLISH);
 				String buildId = android.os.Build.ID.toLowerCase(Locale.ENGLISH);
+				String sdkVersion = android.os.Build.VERSION.RELEASE.toLowerCase(Locale.ENGLISH);
 				
 				boolean setPreDefinedCameraUri = false;
-				if (!(manufacturer.contains("samsung")) && !(manufacturer.contains("sony"))) {
+				if (!(manufacturer.contains("samsung")) && !(manufacturer.contains("sony"))) { 
 					setPreDefinedCameraUri = true;
 				}
-				if (manufacturer.contains("samsung") && model.contains("galaxy nexus")) {
+				if (manufacturer.contains("samsung") && model.contains("galaxy nexus")) { //TESTED
 					setPreDefinedCameraUri = true;
 				}
-				if (manufacturer.contains("samsung") && model.contains("gt-n7000") && buildId.contains("imm76l")) {
+				if (manufacturer.contains("samsung") && model.contains("gt-n7000") && buildId.contains("imm76l")) { //TESTED 
 					setPreDefinedCameraUri = true;
 				}
 				
@@ -131,12 +132,25 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				}
 				
 				///////////////////////////////////////////////////////////////////////////
-				// TEST: CyanogenMod
-				if (buildType.contains("userdebug") && buildDevice.contains("cooper")) {
+				// TEST
+				if (manufacturer.contains("samsung") && model.contains("sgh-t999l")) { //T-Mobile LTE enabled Samsung S3
+					setPreDefinedCameraUri = true;
+				}
+//				if (buildType.contains("userdebug") && buildDevice.contains("cooper")) { // buildType is not necessarily "userdebug"
+				if (buildDevice.contains("cooper")) {
 					setPreDefinedCameraUri = true;
 				}
 				if (buildType.contains("userdebug") && buildDevice.contains("t0lte")) {
 					setPreDefinedCameraUri = true;
+				}
+				if (buildType.contains("userdebug") && buildDevice.contains("kot49h")) {
+					setPreDefinedCameraUri = true;
+				}
+				if (buildType.contains("userdebug") && buildDevice.contains("t03g")) {
+					setPreDefinedCameraUri = true;
+					if (sdkVersion.compareToIgnoreCase("4.3.1")<=0) {
+						setPreDefinedCameraUri = false;	
+					}
 				}
 				if (buildType.contains("userdebug") && buildDevice.contains("gt-i9100")) {
 					setPreDefinedCameraUri = true;
