@@ -41,6 +41,10 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	 */
 	protected static Uri preDefinedCameraUri = null;
 	/**
+	 * Potential 3rd location of photo data. 
+	 */
+	protected static Uri photoUriIn3rdLocation = null;
+	/**
 	 * Retrieved location of the photo.
 	 */
 	protected static Uri photoUri = null;
@@ -238,6 +242,15 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 						photoUri = null;
 					}
 				}
+				if (!myCursor.isAfterLast()) {
+					myCursor.moveToNext();
+					String largeImagePath3rdLocation = myCursor.getString(myCursor
+																.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA));
+					Date dateOfPicture3rdLocation = new Date(myCursor.getLong(myCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN)));
+					if (dateOfPicture3rdLocation != null && dateOfPicture3rdLocation.after(dateCameraIntentStarted)) {
+						photoUriIn3rdLocation = Uri.fromFile(new File(largeImagePath3rdLocation));
+					}					
+				}
 			} catch (Exception e) {
 				logException(e);
 			} finally {
@@ -256,9 +269,28 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 			if (photoUri == null) {
 				photoUri = preDefinedCameraUri;
 			}
+			
+			try {
+				if (photoUri != null && new File(photoUri.getPath()).length() <= 0) {
+					if (preDefinedCameraUri != null) {
+						Uri tempUri = photoUri;
+						photoUri = preDefinedCameraUri;
+						preDefinedCameraUri = tempUri;
+					}
+				}
+			} catch (Exception e) { }
 
 			photoUri = getFileUriFromContentUri(photoUri);
 			preDefinedCameraUri = getFileUriFromContentUri(preDefinedCameraUri);
+			try {
+				if (photoUriIn3rdLocation != null) {
+					if (photoUriIn3rdLocation.equals(photoUri) || photoUriIn3rdLocation.equals(preDefinedCameraUri)) {
+						photoUriIn3rdLocation = null;
+					} else {
+						photoUriIn3rdLocation = getFileUriFromContentUri(photoUriIn3rdLocation);
+					}
+				}
+			} catch (Exception e) { }
 
 			if (photoUri != null) {
 				onPhotoUriFound();
