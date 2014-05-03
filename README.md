@@ -36,6 +36,7 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * LGE Nexus 4
 * LGE Nexus 5
 * LGE Optimus L3 (lg-e400)
+* LGE Optimus L5 II (lg-e455)
 * LGE Optimus L7 (lg-p700)
 * LGE Optimus L7 II (lg-p710)
 * LGE Optimus L9 (lg-p760)
