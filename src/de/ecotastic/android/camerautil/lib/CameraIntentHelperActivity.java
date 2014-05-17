@@ -140,7 +140,6 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				if (manufacturer.contains("samsung") && model.contains("sgh-t999l")) { //T-Mobile LTE enabled Samsung S3
 					setPreDefinedCameraUri = true;
 				}
-//				if (buildType.contains("userdebug") && buildDevice.contains("cooper")) { // buildType is not necessarily "userdebug"
 				if (buildDevice.contains("cooper")) {
 					setPreDefinedCameraUri = true;
 				}
@@ -152,9 +151,6 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				}
 				if (buildType.contains("userdebug") && buildDevice.contains("t03g")) {
 					setPreDefinedCameraUri = true;
-					if (sdkVersion.compareToIgnoreCase("4.3.1")<=0) {
-						setPreDefinedCameraUri = false;	
-					}
 				}
 				if (buildType.contains("userdebug") && buildDevice.contains("gt-i9100")) {
 					setPreDefinedCameraUri = true;
@@ -229,27 +225,29 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 														null, null, 
 														largeFileSort);
 				myCursor.moveToFirst();
-				// This will actually give you the file path location of the image.
-				String largeImagePath = myCursor.getString(myCursor
-												.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA));
-				photoUri = Uri.fromFile(new File(largeImagePath));
-				if (photoUri != null) {
-					dateOfPicture = new Date(myCursor.getLong(myCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN)));
-					if (dateOfPicture != null && dateOfPicture.after(dateCameraIntentStarted)) {
-						rotateXDegrees = myCursor.getInt(myCursor
-													.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.ORIENTATION));
-					} else {
-						photoUri = null;
-					}
-				}
 				if (!myCursor.isAfterLast()) {
-					myCursor.moveToNext();
-					String largeImagePath3rdLocation = myCursor.getString(myCursor
-																.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA));
-					Date dateOfPicture3rdLocation = new Date(myCursor.getLong(myCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN)));
-					if (dateOfPicture3rdLocation != null && dateOfPicture3rdLocation.after(dateCameraIntentStarted)) {
-						photoUriIn3rdLocation = Uri.fromFile(new File(largeImagePath3rdLocation));
-					}					
+					// This will actually give you the file path location of the image.
+					String largeImagePath = myCursor.getString(myCursor
+													.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA));
+					photoUri = Uri.fromFile(new File(largeImagePath));
+					if (photoUri != null) {
+						dateOfPicture = new Date(myCursor.getLong(myCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN)));
+						if (dateOfPicture != null && dateOfPicture.after(dateCameraIntentStarted)) {
+							rotateXDegrees = myCursor.getInt(myCursor
+												.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.ORIENTATION));
+						} else {
+							photoUri = null;
+						}
+					}
+					if (!myCursor.isAfterLast()) {
+						myCursor.moveToNext();
+						String largeImagePath3rdLocation = myCursor.getString(myCursor
+																	.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA));
+						Date dateOfPicture3rdLocation = new Date(myCursor.getLong(myCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN)));
+						if (dateOfPicture3rdLocation != null && dateOfPicture3rdLocation.after(dateCameraIntentStarted)) {
+							photoUriIn3rdLocation = Uri.fromFile(new File(largeImagePath3rdLocation));
+						}					
+					}
 				}
 			} catch (Exception e) {
 				logException(e);

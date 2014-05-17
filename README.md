@@ -15,6 +15,7 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * Alps Cynus T1
 * Alps Cynus T5
 * Alps Cynus F3
+* Asus Nexus 7
 * Caterpillar CAT B15
 * Fairphone FP1
 * HTC Desire C
@@ -33,10 +34,11 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * Huawei p6-u06
 * Huawei u8510
 * Huawei u9200
+* Huawei Ascend Y201 Pro (u8666e)
 * LGE Nexus 4
 * LGE Nexus 5
 * LGE Optimus L3 (lg-e400)
-* LGE Optimus L5 II (lg-e455)
+* LGE Optimus L5 II (lg-e455 and lg-e460)
 * LGE Optimus L7 (lg-p700)
 * LGE Optimus L7 II (lg-p710)
 * LGE Optimus L9 (lg-p760)
@@ -49,6 +51,7 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * Medion p4013
 * Motorola Defy (mb525)
 * Motorola Moto G (xt1032)
+* No.1 N3
 * Samsung Galaxy W (gt-i8150)
 * Samsung Galaxy Ace 2 (gt-i8160)
 * Samsung Galaxy S3 mini (gt-i8190)
@@ -66,10 +69,11 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * Samsung Galaxy R (gt-i9103)
 * Samsung Galaxy Note (gt-n7000)
 * Samsung Galaxy Note 2 (gt-n7100 and gt-n7105)
+* Samsung Galaxy Note 3 (sm-n900t)
 * Samsung Galaxy Note 10.1 (gt-n8000)
 * Samsung Galaxy Tab (gt-p1000)
 * Samsung Galaxy Tab 2 (gt-p3110)
-* Samsung Galaxy Tab 3 (sm-t315)
+* Samsung Galaxy Tab 3 (sm-t310 and sm-t315)
 * Samsung Galaxy Fit (gt-s5670)
 * Samsung Galaxy Ace (gt-s5830 and gt-s5830i)
 * Samsung Galaxy Ace Plus (gt-s7500)
@@ -96,6 +100,7 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * Sony Xperia Neo V (mt11i)
 * Sony Xperia S (lt26i)
 * Sony Xperia Arc S (st18i)
+* Sony Xperia Ion (lt28h)
 
 
 With regards to custom Roms, the code  was _successfully_ tested on the following devices with Android API-Level >= 8 and the CyanogenMod.
