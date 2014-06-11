@@ -42,7 +42,7 @@ public class TakePhotoActivity extends CameraIntentHelperActivity {
         if (preDefinedCameraUri != null && !preDefinedCameraUri.equals(photoUri)) {
         	BitmapHelper.deleteImageWithUriIfExists(preDefinedCameraUri, this);
         }
-        //Delete photo in thid location (if applicable)
+        //Delete photo in third location (if applicable)
         if (photoUriIn3rdLocation != null) {
         	BitmapHelper.deleteImageWithUriIfExists(photoUriIn3rdLocation, this);
         }
