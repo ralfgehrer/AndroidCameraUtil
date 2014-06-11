@@ -7,26 +7,26 @@
     android:paddingTop="@dimen/activity_vertical_margin" >
 
     <Button
-        android:id="@+id/acitvity_take_photo_start_camera_button"
+        android:id="@+id/activity_take_photo_start_camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:onClick="onStartCamera"
-        android:text="@string/acitvity_take_photo_start_camera_button" />
+        android:text="@string/activity_take_photo_start_camera_button" />
 
     <ImageView
-        android:id="@+id/acitvity_take_photo_image_view"
+        android:id="@+id/activity_take_photo_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/acitvity_take_photo_image_view_desc"
-        android:layout_below="@+id/acitvity_take_photo_start_camera_button"
+        android:contentDescription="@string/activity_take_photo_image_view_desc"
+        android:layout_below="@+id/activity_take_photo_start_camera_button"
         android:layout_centerHorizontal="true" />    
         
     <TextView 
-        android:id="@+id/acitvity_take_photo_image_uri" 
+        android:id="@+id/activity_take_photo_image_uri" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/acitvity_take_photo_image_view"
+        android:layout_below="@+id/activity_take_photo_image_view"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
