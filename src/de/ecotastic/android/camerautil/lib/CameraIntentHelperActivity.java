@@ -181,7 +181,7 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	
 	/**
 	 * Receives all activity results and triggers onCameraIntentResult if 
-	 * the the requestCode matches.
+	 * the requestCode matches.
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
