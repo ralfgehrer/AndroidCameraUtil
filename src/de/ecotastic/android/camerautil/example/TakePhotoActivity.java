@@ -28,13 +28,13 @@ public class TakePhotoActivity extends CameraIntentHelperActivity {
 	
 	@Override
 	protected void onPhotoUriFound() {
-		TextView uirView = (TextView) findViewById(R.id.acitvity_take_photo_image_uri);
+		TextView uirView = (TextView) findViewById(R.id.activity_take_photo_image_uri);
 		uirView.setText("photo uri: " + photoUri.toString());
 		
 		Bitmap photo = BitmapHelper.readBitmap(this, photoUri);
         if (photo != null) {
             photo = BitmapHelper.shrinkBitmap(photo, 300, rotateXDegrees);
-            ImageView imageView = (ImageView) findViewById(R.id.acitvity_take_photo_image_view);
+            ImageView imageView = (ImageView) findViewById(R.id.activity_take_photo_image_view);
  			imageView.setImageBitmap(photo); 
         }
 		
@@ -51,7 +51,7 @@ public class TakePhotoActivity extends CameraIntentHelperActivity {
 	@Override
 	protected void onPhotoUriNotFound() {
 		super.onPhotoUriNotFound();
-		TextView uirView = (TextView) findViewById(R.id.acitvity_take_photo_image_uri);
+		TextView uirView = (TextView) findViewById(R.id.activity_take_photo_image_uri);
 		uirView.setText("photo uri: not found");
 	}
 }
