@@ -115,7 +115,7 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				String buildType = android.os.Build.TYPE.toLowerCase(Locale.ENGLISH);
 				String buildDevice = android.os.Build.DEVICE.toLowerCase(Locale.ENGLISH);
 				String buildId = android.os.Build.ID.toLowerCase(Locale.ENGLISH);
-				String sdkVersion = android.os.Build.VERSION.RELEASE.toLowerCase(Locale.ENGLISH);
+//				String sdkVersion = android.os.Build.VERSION.RELEASE.toLowerCase(Locale.ENGLISH);
 				
 				boolean setPreDefinedCameraUri = false;
 				if (!(manufacturer.contains("samsung")) && !(manufacturer.contains("sony"))) { 
@@ -132,6 +132,9 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 					setPreDefinedCameraUri = true;
 				}
 				if (buildType.contains("userdebug") && buildDevice.contains("crespo")) {   //TESTED
+					setPreDefinedCameraUri = true;
+				}
+				if (buildType.contains("userdebug") && buildDevice.contains("gt-i9100")) { //TESTED
 					setPreDefinedCameraUri = true;
 				}
 				
@@ -152,9 +155,16 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				if (buildType.contains("userdebug") && buildDevice.contains("t03g")) {
 					setPreDefinedCameraUri = true;
 				}
-				if (buildType.contains("userdebug") && buildDevice.contains("gt-i9100")) {
+				if (buildType.contains("userdebug") && buildDevice.contains("gt-i9300")) {
 					setPreDefinedCameraUri = true;
 				}
+				if (buildType.contains("userdebug") && buildDevice.contains("gt-i9195")) {
+					setPreDefinedCameraUri = true;
+				}
+				if (buildType.contains("userdebug") && buildDevice.contains("xperia u")) {
+					setPreDefinedCameraUri = true;
+				}
+
 				///////////////////////////////////////////////////////////////////////////
 
 				
@@ -239,14 +249,13 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 							photoUri = null;
 						}
 					}
-					if (!myCursor.isAfterLast()) {
-						myCursor.moveToNext();
+					if (myCursor.moveToNext() && !myCursor.isAfterLast()) {
 						String largeImagePath3rdLocation = myCursor.getString(myCursor
 																	.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA));
 						Date dateOfPicture3rdLocation = new Date(myCursor.getLong(myCursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN)));
 						if (dateOfPicture3rdLocation != null && dateOfPicture3rdLocation.after(dateCameraIntentStarted)) {
 							photoUriIn3rdLocation = Uri.fromFile(new File(largeImagePath3rdLocation));
-						}					
+						}
 					}
 				}
 			} catch (Exception e) {
