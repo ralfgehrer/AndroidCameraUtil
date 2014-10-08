@@ -11,6 +11,8 @@ I tried hard to avoid implementing different strategies based on the device conf
 
 The code was _successfully_ tested on the following devices with Android API-Level >= 8 and stock Android.
 
+* Acer Liquid Z3 (Z130)
+* Acer Liquid E2 (V370)
 * Alcatel One Touch 992D
 * Alps Cynus T1
 * Alps Cynus T5
@@ -18,10 +20,12 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * Asus Nexus 7
 * Caterpillar CAT B15
 * Fairphone FP1
+* Fujitsu M532
+* HTC Desire 500
 * HTC Desire C
 * HTC Desire S
 * HTC Desire X
-* HTC Sensation
+* HTC HD2
 * HTC One
 * HTC One Mini
 * HTC One S
@@ -30,14 +34,22 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * HTC One X+
 * HTC One V
 * HTC One M8
+* HTC Sensation
 * Huawei y300-0100
 * Huawei p6-u06
 * Huawei u8510
 * Huawei u9200
+* Huawei Ascend G300 (u8815)
+* Huawei Ascend G6 (g6-u10)
+* Huawei Ascend G700 (g700-u10)
+* Huawei Ascend P6 (p6-u6)
 * Huawei Ascend Y201 Pro (u8666e)
+* Huawei Ascend Y530 (y530-u00)
 * LGE Nexus 4
 * LGE Nexus 5
 * LGE Optimus L3 (lg-e400)
+* LGE L4 (lg-d160)
+* LGE Optimus L4 II (lg-e440)
 * LGE Optimus L5 II (lg-e455 and lg-e460)
 * LGE Optimus L7 (lg-p700)
 * LGE Optimus L7 II (lg-p710)
@@ -49,58 +61,77 @@ The code was _successfully_ tested on the following devices with Android API-Lev
 * LGE Prada (lg-p940)
 * LGE G2 (lg-d802)
 * Medion p4013
+* Mobistel Cynus E1
 * Motorola Defy (mb525)
 * Motorola Moto G (xt1032)
+* Motorola Moto G2 (xt1068)
+* Motorola Moto X (xt1052)
 * No.1 N3
 * Samsung Galaxy W (gt-i8150)
 * Samsung Galaxy Ace 2 (gt-i8160)
 * Samsung Galaxy S3 mini (gt-i8190)
-* Samsung Galaxy S (gt-i9000)
+* Samsung Galaxy S (gt-i9000, yp-gs1)
 * Samsung Galaxy S Plus (gt-i9001)
 * Samsung Galaxy S Advanced (gt-i9070)
+* Samsung Galaxy S Duos (gt-s7562)
+* Samsung Galaxy S Duos 2 (gt-s7582)
 * Samsung Galaxy SL (gt-i9003)
 * Samsung Galaxy S2 (gt-i9100 and gt-i9100g)
 * Samsung Galaxy S2 Plus (gt-i9105p)
-* Samsung Galaxy S3 (gt-i9300 and gt-i9305)
+* Samsung Galaxy S3 (gt-i9300 and gt-i9305 and gt-i9301i)
 * Samsung Galaxy S3 mini (gt-i8190n)
-* Samsung Galaxy S4 (gt-i9505 and gt-i9506)
+* Samsung Galaxy S4 (gt-i9505, gt-i9515, and gt-i9506)
 * Samsung Galaxy S4 Active (gt-i9295)
 * Samsung Galaxy S4 Mini (gt-i9195)
+* Samsung Galaxy S5 (sm-g900f)
 * Samsung Galaxy R (gt-i9103)
 * Samsung Galaxy Note (gt-n7000)
 * Samsung Galaxy Note 2 (gt-n7100 and gt-n7105)
 * Samsung Galaxy Note 3 (sm-n900t)
 * Samsung Galaxy Note 10.1 (gt-n8000)
 * Samsung Galaxy Tab (gt-p1000)
-* Samsung Galaxy Tab 2 (gt-p3110)
+* Samsung Galaxy Tab 2 (gt-p3110 and gt-p5100)
 * Samsung Galaxy Tab 3 (sm-t310 and sm-t315)
+* Samsung Galaxy TabPRO (sm-t520)
 * Samsung Galaxy Fit (gt-s5670)
 * Samsung Galaxy Ace (gt-s5830 and gt-s5830i)
+* Samsung Galaxy Ace Duos (gt-s6802)
 * Samsung Galaxy Ace Plus (gt-s7500)
+* Samsung Galaxy Ace 3 (gt-s7275r)
 * Samsung Galaxy Young Duos (gt-s6312)
 * Samsung Galaxy Mega (gt-i9205)
 * Samsung Galaxy Mini (gt-s6500)
 * Samsung Galaxy Note 3 (sm-n9005)
 * Samsung Galaxy Note 8.0 (gt-n5110)
 * Samsung Galaxy Note 10.1 (gt-p5210 and sm-p600 and sm-p605)
+* Samsung Galaxy Note 10.1 LTE (gt-n8020)
 * Samsung Galaxy Nexus
+* Samsung Galaxy Pocket S530 (gt-s5300)
 * Samsung Galaxy Xcover (gt-s5690)
+* Samsung Galaxy Xcover 2 (gt-s7710)
+* Samsung Galaxy Y (gt-s5360)
+* Sony Xperia Active (st17i)
+* Sony Xperia Arc (lt15i)
+* Sony Xperia Arc S (lt18i and st18i)
+* Sony Xperia E (c1505)
+* Sony Xperia E dual (c1605)
+* Sony Xperia Go (st27i)
+* Sony Xperia Ion (lt28h)
+* Sony Xperia Mini (st15i)
+* Sony Xperia Neo V (mt11i)
+* Sony Xperia P (lt22i)
+* Sony Xperia Ray (st18i)
+* Sony Xperia S (lt26i)
+* Sony Xperia Sola (mt27i)
+* Sony Xperia T (lt30p)
+* Sony Xperia Tipo (st21i)
+* Sony Xperia Tipo Dual (st21i2)
+* Sony Xperia U (st25i)
+* Sony Xperia V (lt25i)
 * Sony Xperia Z (c6603)
 * Sony Xperia Z1 (c6903)
-* Sony Xperia Ray (st18i)
-* Sony Xperia E dual (c1605)
-* Sony Xperia P (lt22i)
-* Sony Xperia V (lt25i)
-* Sony Xperia U (st25i)
-* Sony Xperia Go (st27i)
-* Sony Xperia Tipo (st21i)
-* Sony Xperia Sola (mt27i)
-* Sony Xperia Arc (lt15i)
-* Sony Xperia Arc S (lt18i)
-* Sony Xperia Neo V (mt11i)
-* Sony Xperia S (lt26i)
-* Sony Xperia Arc S (st18i)
-* Sony Xperia Ion (lt28h)
+* Sony Xperia Z1 Compact (d5503)
+* Sony Xperia Z2 (d6503)
 
 
 With regards to custom Roms, the code  was _successfully_ tested on the following devices with Android API-Level >= 8 and the CyanogenMod.
