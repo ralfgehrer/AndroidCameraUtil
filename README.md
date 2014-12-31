@@ -1,3 +1,7 @@
+<b>Note:</b><br/>
+As of December 31, 2014 this branch is deprecated. The master branch was migrated to Gradle and Android Studio.
+
+
 Android Camera Util
 ===================
 
@@ -141,6 +145,6 @@ With regards to custom Roms, the code  was _successfully_ tested on the followin
 
 
 
-Please feel free to check out the code. [CameraIntentHelperActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/src/de/ecotastic/android/camerautil/lib/CameraIntentHelperActivity.java) provides the main functionality.
+Please feel free to check out the code. [CameraIntentHelperActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/eclipse-with-adt-project/src/de/ecotastic/android/camerautil/lib/CameraIntentHelperActivity.java) provides the main functionality.
 
-[TakePhotoActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/src/de/ecotastic/android/camerautil/example/TakePhotoActivity.java) is an example Activitiy on how to use the CameraIntentHelperActivity.
+[TakePhotoActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/eclipse-with-adt-project/src/de/ecotastic/android/camerautil/example/TakePhotoActivity.java) is an example Activitiy on how to use the CameraIntentHelperActivity.
