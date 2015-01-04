@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import de.ecotastic.android.camerautil.lib.CameraIntentHelperActivity;
-import de.ecotastic.android.camerautil.util.BitmapHelper;
 
 /**
  * Example Activity of how to use the CameraIntentHelperActivity
