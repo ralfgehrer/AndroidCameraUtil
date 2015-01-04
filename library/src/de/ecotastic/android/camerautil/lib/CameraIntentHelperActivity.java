@@ -372,11 +372,12 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	 * @return Uri
 	 */
 	private Uri getFileUriFromContentUri(Uri cameraPicUri) {
-		try {
+    Cursor cursor = null;
+    try {
 			if (cameraPicUri != null
 					&& cameraPicUri.toString().startsWith("content")) {
 				String[] proj = { MediaStore.Images.Media.DATA };
-				Cursor cursor = getContentResolver().query(cameraPicUri, proj, null, null, null);
+				cursor = getContentResolver().query(cameraPicUri, proj, null, null, null);
 				cursor.moveToFirst();
 				// This will actually give you the file path location of the image.
 				String largeImagePath = cursor.getString(cursor
@@ -386,6 +387,10 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 			return cameraPicUri;
 		} catch (Exception e) {
 			return cameraPicUri;
-		}
-	}
+		}finally {
+      if (cursor != null && !cursor.isClosed()) {
+        cursor.close();
+      }
+    }
+  }
 }
