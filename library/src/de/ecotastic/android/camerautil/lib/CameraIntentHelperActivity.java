@@ -137,6 +137,9 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				if (buildType.contains("userdebug") && buildDevice.contains("gt-i9100")) { //TESTED
 					setPreDefinedCameraUri = true;
 				}
+				if (manufacturer.contains("samsung") && model.contains("gt-i9305")) { // TESTED Unbranded LTE enabled Samsung S3 ITA
+					setPreDefinedCameraUri = true;
+				}
 				
 				///////////////////////////////////////////////////////////////////////////
 				// TEST
