@@ -142,6 +142,7 @@ With regards to custom Roms, the code  was _successfully_ tested on the followin
 
 * Samsung Galaxy S Plus (gt-i9001)
 * Samsung Galaxy Nexus S
+* Samsung Galaxy S3 LTE (gt-i9305 & CM12)
 
 
 
