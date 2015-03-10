@@ -13,11 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.widget.Toast;
-import de.ecotastic.android.camerautil.R;
-import de.ecotastic.android.camerautil.util.DateParser;
 
 /**
  * A helper Activity to start the camera activity and retrieve the location 
@@ -54,14 +49,14 @@ public class CameraIntentHelper {
 	private int rotateXDegrees = 0;
 
 
-	private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-	private final CameraIntenHelperCallback mCameraIntentHelpercallback;
+	private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 978123;
+	private final CameraIntentHelperCallback mCameraIntentHelperCallback;
 	public Activity mActivity;
 
 
-	public CameraIntentHelper(Activity activity, CameraIntenHelperCallback cameraIntenHelperCallback) {
+	public CameraIntentHelper(Activity activity, CameraIntentHelperCallback cameraIntentHelperCallback) {
 		mActivity = activity;
-		mCameraIntentHelpercallback = cameraIntenHelperCallback;
+		mCameraIntentHelperCallback = cameraIntentHelperCallback;
 	}
 
 
@@ -183,9 +178,9 @@ public class CameraIntentHelper {
 				}				
 				mActivity.startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 			} catch (ActivityNotFoundException e) {
-				if (mCameraIntentHelpercallback != null) {
-					mCameraIntentHelpercallback.logException(e);
-					mCameraIntentHelpercallback.onCouldNotTakePhoto();
+				if (mCameraIntentHelperCallback != null) {
+					mCameraIntentHelperCallback.logException(e);
+					mCameraIntentHelperCallback.onCouldNotTakePhoto();
 				}
 			}
 		} else {
@@ -261,8 +256,8 @@ public class CameraIntentHelper {
 					}
 				}
 			} catch (Exception e) {
-				if (mCameraIntentHelpercallback != null) {
-					mCameraIntentHelpercallback.logException(e);
+				if (mCameraIntentHelperCallback != null) {
+					mCameraIntentHelperCallback.logException(e);
 				}
 			} finally {
 				if (myCursor != null && !myCursor.isClosed()) {
@@ -309,12 +304,12 @@ public class CameraIntentHelper {
 				onPhotoUriNotFound();
 			}
 		} else if (resultCode == Activity.RESULT_CANCELED) {
-			if (mCameraIntentHelpercallback != null) {
-				mCameraIntentHelpercallback.onCanceled();
+			if (mCameraIntentHelperCallback != null) {
+				mCameraIntentHelperCallback.onCanceled();
 			}
 		} else {
-			if (mCameraIntentHelpercallback != null) {
-				mCameraIntentHelpercallback.onCanceled();
+			if (mCameraIntentHelperCallback != null) {
+				mCameraIntentHelperCallback.onCanceled();
 			}
 		}
 	}
@@ -324,8 +319,8 @@ public class CameraIntentHelper {
 	 * and its orientation could be retrieved.
 	 */
 	private void onPhotoUriFound() {
-		if (mCameraIntentHelpercallback != null) {
-			mCameraIntentHelpercallback.onPhotoUriFound(dateCameraIntentStarted, preDefinedCameraUri, photoUriIn3rdLocation, photoUri);
+		if (mCameraIntentHelperCallback != null) {
+			mCameraIntentHelperCallback.onPhotoUriFound(dateCameraIntentStarted, preDefinedCameraUri, photoUriIn3rdLocation, photoUri);
 		}
 	}
 	
@@ -333,8 +328,8 @@ public class CameraIntentHelper {
 	 * Being called if the photo could not be located (Uri == null). 
 	 */
 	private void onPhotoUriNotFound() {
-		if (mCameraIntentHelpercallback != null) {
-			mCameraIntentHelpercallback.logMessage("Could not find a photoUri that is != null");
+		if (mCameraIntentHelperCallback != null) {
+			mCameraIntentHelperCallback.onPhotoUriNotFound();
 		}
 	}
 
@@ -342,7 +337,9 @@ public class CameraIntentHelper {
 	 * Being called if the SD card (or the internal mass storage respectively) is not mounted.
 	 */
 	private void onSdCardNotMounted() {
-		Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.error_sd_card_not_mounted), Toast.LENGTH_LONG).show();
+		if (mCameraIntentHelperCallback != null) {
+			mCameraIntentHelperCallback.onSdCardNotMounted();
+		}
 	}
 
 	/**
@@ -369,5 +366,9 @@ public class CameraIntentHelper {
 		} catch (Exception e) {
 			return cameraPicUri;
 		}
+	}
+
+	public Uri getPhotoUri() {
+		return photoUri;
 	}
 }

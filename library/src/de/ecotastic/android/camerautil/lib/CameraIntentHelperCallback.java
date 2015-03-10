@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by peter on 3/10/15.
  */
-public interface CameraIntenHelperCallback {
+public interface CameraIntentHelperCallback {
 	void logMessage(String s);
 
 	void onCanceled();
@@ -17,4 +17,8 @@ public interface CameraIntenHelperCallback {
 	void onCouldNotTakePhoto();
 
 	void onPhotoUriFound(Date dateCameraIntentStarted, Uri preDefinedCameraUri, Uri photoUriIn3rdLocation, Uri photoUri);
+
+	void onPhotoUriNotFound();
+
+	void onSdCardNotMounted();
 }
