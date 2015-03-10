@@ -16,7 +16,7 @@ public interface CameraIntentHelperCallback {
 
 	void onCouldNotTakePhoto();
 
-	void onPhotoUriFound(Date dateCameraIntentStarted, Uri preDefinedCameraUri, Uri photoUriIn3rdLocation, Uri photoUri);
+	void onPhotoUriFound(Date dateCameraIntentStarted, Uri preDefinedCameraUri, Uri photoUriIn3rdLocation, Uri photoUri, int rotateXDegrees);
 
 	void onPhotoUriNotFound();
 

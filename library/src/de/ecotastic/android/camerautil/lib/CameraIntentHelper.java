@@ -320,7 +320,7 @@ public class CameraIntentHelper {
 	 */
 	private void onPhotoUriFound() {
 		if (mCameraIntentHelperCallback != null) {
-			mCameraIntentHelperCallback.onPhotoUriFound(dateCameraIntentStarted, preDefinedCameraUri, photoUriIn3rdLocation, photoUri);
+			mCameraIntentHelperCallback.onPhotoUriFound(dateCameraIntentStarted, preDefinedCameraUri, photoUriIn3rdLocation, photoUri, rotateXDegrees);
 		}
 	}
 	

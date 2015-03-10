@@ -45,13 +45,13 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 			}
 
 			@Override
-			public void onPhotoUriFound(Date dateCameraIntentStarted, Uri preDefinedCameraUri, Uri photoUriIn3rdLocation, Uri photoUri) {
-				logMessage("Your photo is stored under: " + photoUri.toString());
+			public void onPhotoUriFound(Date dateCameraIntentStarted, Uri preDefinedCameraUri, Uri photoUriIn3rdLocation, Uri photoUri, int rotateXDegrees) {
+				CameraIntentHelperActivity.this.onPhotoUriFound(dateCameraIntentStarted, preDefinedCameraUri, photoUriIn3rdLocation, photoUri,rotateXDegrees);
 			}
 
 			@Override
 			public void onPhotoUriNotFound() {
-				logMessage("Could not find a photoUri that is != null");
+				CameraIntentHelperActivity.this.onPhotoUriNotFound();
 			}
 
 			@Override
@@ -85,5 +85,13 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	 */
 	protected void logMessage(String exceptionMessage) {
 		Log.d(getClass().getName(), exceptionMessage);
+	}
+
+	void onPhotoUriFound(Date dateCameraIntentStarted, Uri preDefinedCameraUri, Uri photoUriIn3rdLocation, Uri photoUri, int rotateXDegrees) {
+		logMessage("Your photo is stored under: " + photoUri.toString());
+	}
+
+	void onPhotoUriNotFound() {
+		logMessage("no photo uri found");
 	}
 }
