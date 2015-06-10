@@ -1,9 +1,5 @@
 package de.ecotastic.android.camerautil.lib;
 
-import java.io.File;
-import java.util.Date;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
@@ -13,6 +9,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+
+import java.io.File;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * A helper Activity to start the camera activity and retrieve the location 
@@ -49,7 +49,8 @@ public class CameraIntentHelper {
 	private int rotateXDegrees = 0;
 
 
-	private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 978123;
+	private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
 	private final CameraIntentHelperCallback mCameraIntentHelperCallback;
 	public Activity mActivity;
 
@@ -351,11 +352,12 @@ public class CameraIntentHelper {
 	 * @return Uri
 	 */
 	private Uri getFileUriFromContentUri(Uri cameraPicUri) {
+        Cursor cursor = null;
 		try {
 			if (cameraPicUri != null
 					&& cameraPicUri.toString().startsWith("content")) {
 				String[] proj = { MediaStore.Images.Media.DATA };
-				Cursor cursor = mActivity.getContentResolver().query(cameraPicUri, proj, null, null, null);
+				cursor = mActivity.getContentResolver().query(cameraPicUri, proj, null, null, null);
 				cursor.moveToFirst();
 				// This will actually give you the file path location of the image.
 				String largeImagePath = cursor.getString(cursor
@@ -365,7 +367,11 @@ public class CameraIntentHelper {
 			return cameraPicUri;
 		} catch (Exception e) {
 			return cameraPicUri;
-		}
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
 	}
 
 	public Uri getPhotoUri() {
