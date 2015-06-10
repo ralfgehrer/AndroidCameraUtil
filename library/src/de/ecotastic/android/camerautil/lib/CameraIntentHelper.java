@@ -13,11 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.widget.Toast;
-import de.ecotastic.android.camerautil.R;
-import de.ecotastic.android.camerautil.util.DateParser;
 
 /**
  * A helper Activity to start the camera activity and retrieve the location 
@@ -25,7 +20,7 @@ import de.ecotastic.android.camerautil.util.DateParser;
  *  
  * @author Ralf Gehrer <ralf@ecotastic.de>
  */
-public class CameraIntentHelperActivity extends FragmentActivity {
+public class CameraIntentHelper {
 	private static final String DATE_CAMERA_INTENT_STARTED_STATE = "de.ecotastic.android.camerautil.example.TakePhotoActivity.dateCameraIntentStarted";
 	private static final String CAMERA_PIC_URI_STATE = "de.ecotastic.android.camerautil.example.TakePhotoActivity.CAMERA_PIC_URI_STATE";
 	private static final String PHOTO_URI_STATE = "de.ecotastic.android.camerautil.example.TakePhotoActivity.PHOTO_URI_STATE";
@@ -35,33 +30,37 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	/**
 	 * Date and time the camera intent was started.
 	 */
-	protected static Date dateCameraIntentStarted = null;
+	private Date dateCameraIntentStarted = null;
 	/**
-	 * Default location where we want the photo to be ideally stored. 
+	 * Default location where we want the photo to be ideally stored.
 	 */
-	protected static Uri preDefinedCameraUri = null;
+	private Uri preDefinedCameraUri = null;
 	/**
-	 * Potential 3rd location of photo data. 
+	 * Potential 3rd location of photo data.
 	 */
-	protected static Uri photoUriIn3rdLocation = null;
+	private Uri photoUriIn3rdLocation = null;
 	/**
 	 * Retrieved location of the photo.
 	 */
-	protected static Uri photoUri = null;
+	private Uri photoUri = null;
 	/**
 	 * Orientation of the retrieved photo.
 	 */
-	protected static int rotateXDegrees = 0;
+	private int rotateXDegrees = 0;
 
-	
-	private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
-	/**
-	 * Saves the current state of the activity.
-	 */
-	@Override
-	protected void onSaveInstanceState(Bundle savedInstanceState) {
-		super.onSaveInstanceState(savedInstanceState);
+	private final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 978123;
+	private final CameraIntentHelperCallback mCameraIntentHelperCallback;
+	public Activity mActivity;
+
+
+	public CameraIntentHelper(Activity activity, CameraIntentHelperCallback cameraIntentHelperCallback) {
+		mActivity = activity;
+		mCameraIntentHelperCallback = cameraIntentHelperCallback;
+	}
+
+
+	public void onSaveInstanceState(Bundle savedInstanceState) {
 		if (dateCameraIntentStarted != null) {
 			savedInstanceState.putString(DATE_CAMERA_INTENT_STARTED_STATE, DateParser.dateToString(dateCameraIntentStarted));
 		}
@@ -77,9 +76,7 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	/**
 	 * Reinitializes a saved state of the activity.
 	 */
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		if (savedInstanceState.containsKey(DATE_CAMERA_INTENT_STARTED_STATE)) {
 			dateCameraIntentStarted = DateParser.stringToDate(savedInstanceState.getString(DATE_CAMERA_INTENT_STARTED_STATE));
 		}
@@ -103,7 +100,7 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	 * 
 	 * In both cases we remember the time the camera activity was started.
 	 */
-	protected void startCameraIntent() {
+	public void startCameraIntent() {
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 			try {
 				// NOTE: Do NOT SET: intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraPicUri) 
@@ -174,15 +171,17 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 					String filename = System.currentTimeMillis() + ".jpg";
 					ContentValues values = new ContentValues();
 					values.put(MediaStore.Images.Media.TITLE, filename);
-					preDefinedCameraUri = getContentResolver().insert(
+					preDefinedCameraUri = mActivity.getContentResolver().insert(
 												MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
 												values);
 					intent.putExtra(MediaStore.EXTRA_OUTPUT, preDefinedCameraUri);
 				}				
-				startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+				mActivity.startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 			} catch (ActivityNotFoundException e) {
-				logException(e);
-				onCouldNotTakePhoto();
+				if (mCameraIntentHelperCallback != null) {
+					mCameraIntentHelperCallback.logException(e);
+					mCameraIntentHelperCallback.onCouldNotTakePhoto();
+				}
 			}
 		} else {
 			onSdCardNotMounted();
@@ -193,9 +192,7 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	 * Receives all activity results and triggers onCameraIntentResult if 
 	 * the requestCode matches.
 	 */
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		super.onActivityResult(requestCode, resultCode, intent);
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		switch (requestCode) {
 			case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE: {
 				onCameraIntentResult(requestCode, resultCode, intent);
@@ -219,8 +216,8 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	 * @param resultCode
 	 * @param intent
 	 */
-	protected void onCameraIntentResult(int requestCode, int resultCode, Intent intent) {
-		if (resultCode == RESULT_OK) {
+	private void onCameraIntentResult(int requestCode, int resultCode, Intent intent) {
+		if (resultCode == Activity.RESULT_OK) {
 			Cursor myCursor = null;
 			Date dateOfPicture = null;
 			try {
@@ -230,7 +227,7 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 												MediaStore.Images.ImageColumns.ORIENTATION,
 												MediaStore.Images.ImageColumns.DATE_TAKEN };
 				String largeFileSort = MediaStore.Images.ImageColumns._ID + " DESC";
-				myCursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+				myCursor = mActivity.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
 														largeFileProjection, 
 														null, null, 
 														largeFileSort);
@@ -259,7 +256,9 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 					}
 				}
 			} catch (Exception e) {
-				logException(e);
+				if (mCameraIntentHelperCallback != null) {
+					mCameraIntentHelperCallback.logException(e);
+				}
 			} finally {
 				if (myCursor != null && !myCursor.isClosed()) {
 					myCursor.close();
@@ -305,9 +304,13 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 				onPhotoUriNotFound();
 			}
 		} else if (resultCode == Activity.RESULT_CANCELED) {
-			onCanceled();
+			if (mCameraIntentHelperCallback != null) {
+				mCameraIntentHelperCallback.onCanceled();
+			}
 		} else {
-			onCanceled();
+			if (mCameraIntentHelperCallback != null) {
+				mCameraIntentHelperCallback.onCanceled();
+			}
 		}
 	}
 
@@ -315,54 +318,30 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 	 * Being called if the photo could be located. The photo's Uri 
 	 * and its orientation could be retrieved.
 	 */
-	protected void onPhotoUriFound() {
-		logMessage("Your photo is stored under: " + photoUri.toString());
+	private void onPhotoUriFound() {
+		if (mCameraIntentHelperCallback != null) {
+			mCameraIntentHelperCallback.onPhotoUriFound(dateCameraIntentStarted, preDefinedCameraUri, photoUriIn3rdLocation, photoUri, rotateXDegrees);
+		}
 	}
 	
 	/**
 	 * Being called if the photo could not be located (Uri == null). 
 	 */
-	protected void onPhotoUriNotFound() {
-		logMessage("Could not find a photoUri that is != null");
-	}
-	
-	/**
-	 * Being called if the camera intent could not be started or something else went wrong.
-	 */
-	protected void onCouldNotTakePhoto() {
-		Toast.makeText(getApplicationContext(), getString(R.string.error_could_not_take_photo), Toast.LENGTH_LONG).show();		
+	private void onPhotoUriNotFound() {
+		if (mCameraIntentHelperCallback != null) {
+			mCameraIntentHelperCallback.onPhotoUriNotFound();
+		}
 	}
 
 	/**
 	 * Being called if the SD card (or the internal mass storage respectively) is not mounted.
 	 */
-	protected void onSdCardNotMounted() {
-		Toast.makeText(getApplicationContext(), getString(R.string.error_sd_card_not_mounted), Toast.LENGTH_LONG).show();		
+	private void onSdCardNotMounted() {
+		if (mCameraIntentHelperCallback != null) {
+			mCameraIntentHelperCallback.onSdCardNotMounted();
+		}
 	}
 
-	/**
-	 * Being called if the camera intent was canceled.
-	 */
-	protected void onCanceled() {
-		logMessage("Camera Intent was canceled");
-	}
-	
-	/**
-	 * Logs the passed exception.
-	 * @param exception
-	 */
-	protected void logException(Exception exception) {
-		logMessage(exception.toString());
-	}
-	
-	/**
-	 * Logs the passed exception messages.
-	 * @param exceptionMessage
-	 */
-	protected void logMessage(String exceptionMessage) {
-		Log.d(getClass().getName(), exceptionMessage);
-	}
-	
 	/**
 	 * Given an Uri that is a content Uri (e.g.
 	 * content://media/external/images/media/1884) this function returns the
@@ -376,7 +355,7 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 			if (cameraPicUri != null
 					&& cameraPicUri.toString().startsWith("content")) {
 				String[] proj = { MediaStore.Images.Media.DATA };
-				Cursor cursor = getContentResolver().query(cameraPicUri, proj, null, null, null);
+				Cursor cursor = mActivity.getContentResolver().query(cameraPicUri, proj, null, null, null);
 				cursor.moveToFirst();
 				// This will actually give you the file path location of the image.
 				String largeImagePath = cursor.getString(cursor
@@ -387,5 +366,9 @@ public class CameraIntentHelperActivity extends FragmentActivity {
 		} catch (Exception e) {
 			return cameraPicUri;
 		}
+	}
+
+	public Uri getPhotoUri() {
+		return photoUri;
 	}
 }

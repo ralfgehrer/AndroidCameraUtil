@@ -1,4 +1,4 @@
-package de.ecotastic.android.camerautil.util;
+package de.ecotastic.android.camerautil.sample.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

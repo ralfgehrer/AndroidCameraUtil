@@ -1,4 +1,4 @@
-package de.ecotastic.android.camerautil.util;
+package de.ecotastic.android.camerautil.lib;
 
 import android.annotation.SuppressLint;
 import java.text.DateFormat;

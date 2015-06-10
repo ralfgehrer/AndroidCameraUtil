@@ -1,12 +1,13 @@
 package de.ecotastic.android.camerautil.sample;
 
 import android.graphics.Bitmap;
+import android.net.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import de.ecotastic.android.camerautil.lib.CameraIntentHelperActivity;
-import de.ecotastic.android.camerautil.util.BitmapHelper;
+
+import java.util.*;
 
 /**
  * Example Activity of how to use the CameraIntentHelperActivity
@@ -14,19 +15,16 @@ import de.ecotastic.android.camerautil.util.BitmapHelper;
  * @author Ralf Gehrer <ralf@ecotastic.de>
  */
 public class TakePhotoActivity extends CameraIntentHelperActivity {
+	private de.ecotastic.android.camerautil.sample.util.BitmapHelper BitmapHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_take_photo);
 	}
-	
-	public void onStartCamera(View view) {
-		startCameraIntent();
-	}
-	
+
 	@Override
-	protected void onPhotoUriFound() {
+	void onPhotoUriFound(Date dateCameraIntentStarted, Uri preDefinedCameraUri, Uri photoUriIn3rdLocation, Uri photoUri, int rotateXDegrees) {
 		TextView uirView = (TextView) findViewById(R.id.activity_take_photo_image_uri);
 		uirView.setText("photo uri: " + photoUri.toString());
 		
@@ -48,9 +46,13 @@ public class TakePhotoActivity extends CameraIntentHelperActivity {
 	}
 	
 	@Override
-	protected void onPhotoUriNotFound() {
+	void onPhotoUriNotFound() {
 		super.onPhotoUriNotFound();
 		TextView uirView = (TextView) findViewById(R.id.activity_take_photo_image_uri);
 		uirView.setText("photo uri: not found");
+	}
+
+	public void onStartCamera(View view) {
+		mCameraIntentHelper.startCameraIntent();
 	}
 }
