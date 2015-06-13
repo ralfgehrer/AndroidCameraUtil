@@ -5,20 +5,23 @@ import android.net.*;
 import java.util.*;
 
 /**
- * Created by peter on 3/10/15.
+ * Specifies the interface of a CameraIntentHelper request. The calling class has to implement the
+ * interface in order to be notified when the request completes, either successfully or with an error.
+ *
+ * @author Ralf Gehrer <ralf@ecotastic.de>
  */
 public interface CameraIntentHelperCallback {
-	void logMessage(String s);
+    void onPhotoUriFound(Date dateCameraIntentStarted, Uri photoUri, int rotateXDegrees);
+
+    void deletePhotoWithUri(Uri photoUri);
+
+    void onSdCardNotMounted();
 
 	void onCanceled();
 
-	void logException(Exception e);
-
 	void onCouldNotTakePhoto();
-
-	void onPhotoUriFound(Date dateCameraIntentStarted, Uri preDefinedCameraUri, Uri photoUriIn3rdLocation, Uri photoUri, int rotateXDegrees);
 
 	void onPhotoUriNotFound();
 
-	void onSdCardNotMounted();
+    void logException(Exception e);
 }

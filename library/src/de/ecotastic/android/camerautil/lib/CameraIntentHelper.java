@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * A helper Activity to start the camera activity and retrieve the location 
+ * A helper class to start the camera activity and retrieve the location
  * and orientation of the photo.
  *  
  * @author Ralf Gehrer <ralf@ecotastic.de>
@@ -25,7 +25,6 @@ public class CameraIntentHelper {
 	private static final String CAMERA_PIC_URI_STATE = "de.ecotastic.android.camerautil.example.TakePhotoActivity.CAMERA_PIC_URI_STATE";
 	private static final String PHOTO_URI_STATE = "de.ecotastic.android.camerautil.example.TakePhotoActivity.PHOTO_URI_STATE";
 	private static final String ROTATE_X_DEGREES_STATE = "de.ecotastic.android.camerautil.example.TakePhotoActivity.ROTATE_X_DEGREES_STATE";
-
 	
 	/**
 	 * Date and time the camera intent was started.
@@ -35,14 +34,14 @@ public class CameraIntentHelper {
 	 * Default location where we want the photo to be ideally stored.
 	 */
 	private Uri preDefinedCameraUri = null;
-	/**
+    /**
+     * Retrieved location of the photo.
+     */
+    private Uri photoUri = null;
+    /**
 	 * Potential 3rd location of photo data.
 	 */
 	private Uri photoUriIn3rdLocation = null;
-	/**
-	 * Retrieved location of the photo.
-	 */
-	private Uri photoUri = null;
 	/**
 	 * Orientation of the retrieved photo.
 	 */
@@ -60,7 +59,9 @@ public class CameraIntentHelper {
 		mCameraIntentHelperCallback = cameraIntentHelperCallback;
 	}
 
-
+    /**
+     * Call to save the helpers instance state in mActivity's savedInstanceState.
+     */
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		if (dateCameraIntentStarted != null) {
 			savedInstanceState.putString(DATE_CAMERA_INTENT_STARTED_STATE, DateParser.dateToString(dateCameraIntentStarted));
@@ -73,10 +74,10 @@ public class CameraIntentHelper {
 		}
 		savedInstanceState.putInt(ROTATE_X_DEGREES_STATE, rotateXDegrees);
 	}
-	
-	/**
-	 * Reinitializes a saved state of the activity.
-	 */
+
+    /**
+     * Call to reinitialize the helpers instance state.
+     */
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		if (savedInstanceState.containsKey(DATE_CAMERA_INTENT_STARTED_STATE)) {
 			dateCameraIntentStarted = DateParser.stringToDate(savedInstanceState.getString(DATE_CAMERA_INTENT_STARTED_STATE));
@@ -94,10 +95,13 @@ public class CameraIntentHelper {
 	 * Starts the camera intent depending on the device configuration. 
 	 * 
 	 * <b>for Samsung and Sony devices:</b>
-	 * We call the camera activity with the method call to startActivityForResult. We only set the constant CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE. We do NOT set any other intent extras.
+	 * We call the camera activity with the method call to startActivityForResult. We only set the
+     * constant CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE. We do NOT set any other intent extras.
 	 * 
 	 * <b>for all other devices:</b>
-	 * We call the camera activity with the method call to startActivityForResult as previously. This time, however, we additionally set the intent extra MediaStore.EXTRA_OUTPUT and provide an URI, where we want the image to be stored.
+	 * We call the camera activity with the method call to startActivityForResult as previously.
+     * This time, however, we additionally set the intent extra MediaStore.EXTRA_OUTPUT and provide
+     * an URI, where we want the image to be stored.
 	 * 
 	 * In both cases we remember the time the camera activity was started.
 	 */
@@ -207,11 +211,19 @@ public class CameraIntentHelper {
 	 * On camera activity result, we try to locate the photo.
 	 * 
 	 * <b>Mediastore:</b>
-	 * First, we try to read the photo being captured from the MediaStore. Using a ContentResolver on the MediaStore content, we retrieve the latest image being taken, as well as its orientation property and its timestamp. If we find an image and it was not taken before the camera intent was called, it is the image we were looking for. Otherwise, we dismiss the result and try one of the following approaches.
+	 * First, we try to read the photo being captured from the MediaStore. Using a ContentResolver
+     * on the MediaStore content, we retrieve the latest image being taken, as well as its
+     * orientation property and its timestamp. If we find an image and it was not taken before
+     * the camera intent was called, it is the image we were looking for. Otherwise, we dismiss
+     * the result and try one of the following approaches.
+     *
 	 * <b>Intent extra:</b>
-	 * Second, we try to get an image Uri from intent.getData() of the returning intent. If this is not successful either, we continue with step 3.
+	 * Second, we try to get an image Uri from intent.getData() of the returning intent.
+     * If this is not successful either, we continue with step 3.
+     *
 	 * <b>Default photo Uri:</b>
-	 * If all of the above mentioned steps did not work, we use the image Uri we passed to the camera activity.
+	 * If all of the above mentioned steps did not work, we use the image Uri we passed to
+     * the camera activity.
 	 * 
 	 * @param requestCode
 	 * @param resultCode
@@ -304,6 +316,7 @@ public class CameraIntentHelper {
 			} else {
 				onPhotoUriNotFound();
 			}
+            deletePhotoInOtherLocations();
 		} else if (resultCode == Activity.RESULT_CANCELED) {
 			if (mCameraIntentHelperCallback != null) {
 				mCameraIntentHelperCallback.onCanceled();
@@ -315,18 +328,31 @@ public class CameraIntentHelper {
 		}
 	}
 
-	/**
+    /**
+     * On some devices the taken photo is being stored in multiple locations. Consequently, we have
+     * to remove images in any other location but the the one image in photoUri.
+     */
+    private void deletePhotoInOtherLocations() {
+        if (preDefinedCameraUri != null && !preDefinedCameraUri.equals(photoUri) && mCameraIntentHelperCallback != null) {
+            mCameraIntentHelperCallback.deletePhotoWithUri(preDefinedCameraUri);
+        }
+        if (photoUriIn3rdLocation != null && !photoUriIn3rdLocation.equals(photoUri) && mCameraIntentHelperCallback != null) {
+            mCameraIntentHelperCallback.deletePhotoWithUri(photoUriIn3rdLocation);
+        }
+    }
+
+    /**
 	 * Being called if the photo could be located. The photo's Uri 
 	 * and its orientation could be retrieved.
 	 */
 	private void onPhotoUriFound() {
 		if (mCameraIntentHelperCallback != null) {
-			mCameraIntentHelperCallback.onPhotoUriFound(dateCameraIntentStarted, preDefinedCameraUri, photoUriIn3rdLocation, photoUri, rotateXDegrees);
+			mCameraIntentHelperCallback.onPhotoUriFound(dateCameraIntentStarted, photoUri, rotateXDegrees);
 		}
 	}
 	
 	/**
-	 * Being called if the photo could not be located (Uri == null). 
+	 * Being called if the photo could not be located (photoUri == null).
 	 */
 	private void onPhotoUriNotFound() {
 		if (mCameraIntentHelperCallback != null) {
@@ -344,8 +370,8 @@ public class CameraIntentHelper {
 	}
 
 	/**
-	 * Given an Uri that is a content Uri (e.g.
-	 * content://media/external/images/media/1884) this function returns the
+	 * Given an Uri that is a content Uri
+     * (e.g.content://media/external/images/media/1884) this function returns the
 	 * respective file Uri, that is e.g. file://media/external/DCIM/abc.jpg
 	 * 
 	 * @param cameraPicUri
@@ -372,9 +398,5 @@ public class CameraIntentHelper {
                 cursor.close();
             }
         }
-	}
-
-	public Uri getPhotoUri() {
-		return photoUri;
 	}
 }

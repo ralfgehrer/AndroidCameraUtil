@@ -35,7 +35,7 @@ public class DateParser {
 	}
 	
 	/**
-	 * Converts a string representation of a date to its Date object.
+	 * Converts a string representation of a date to its respective Date object.
 	 * @param dateAsString
 	 * @return Date
 	 */

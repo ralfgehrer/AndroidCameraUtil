@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>    
-    <string name="activity_take_photo_start_camera_button">Foto schießen!</string>
-    <string name="activity_take_photo_image_view_desc">Foto</string>
+    <string name="activity_camera_intent_start_camera_button">Foto schießen!</string>
+    <string name="activity_camera_intent_image_view_desc">Foto</string>
+    <string name="activity_camera_intent_photo_uri_found">Bildpfad gefunden: </string>
+    <string name="activity_camera_intent_photo_uri_not_found">Bildpfad nicht gefunden!</string>
+
+    <string name="warning_camera_intent_canceled">Aufnhame wurde vom Nutzer abgebrochen.</string>
+
+    <string name="error_sd_card_not_mounted">Externer Speicher wird vorausgesetzt. Vermutlich ist deine SD Karte derzeit nicht verfügbar.</string>
+    <string name="error_could_not_take_photo">Es ist ein Problem mit der Kamera aufgetreten. Diese Unannehmlichkeit tut uns sehr leid!</string>
+    <string name="error_sth_went_wrong">Etwas ist schief gegangen. Bitte versuch es nochmal.</string>
 </resources>

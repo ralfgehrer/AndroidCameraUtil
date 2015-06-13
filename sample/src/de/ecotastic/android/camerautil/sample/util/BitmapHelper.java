@@ -1,10 +1,5 @@
 package de.ecotastic.android.camerautil.sample.util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -13,6 +8,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Environment;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * A helper class to conveniently alter Bitmap data
@@ -23,7 +23,6 @@ public class BitmapHelper {
 
 	/**
      * Converts a Bitmap to a byteArray.
-     * @param Bitmap
      * @return byteArray
      */
     public static byte[] bitmapToByteArray(Bitmap bitmap) {

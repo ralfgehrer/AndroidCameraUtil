@@ -2,6 +2,14 @@
 <resources>
     <string name="app_name">Android Camera Util</string>
 	
-	<string name="activity_take_photo_start_camera_button">Take a picture!</string>
-	<string name="activity_take_photo_image_view_desc">photo</string>
+	<string name="activity_camera_intent_start_camera_button">Take a picture!</string>
+	<string name="activity_camera_intent_image_view_desc">Photo</string>
+    <string name="activity_camera_intent_photo_uri_found">Photo uri found: </string>
+    <string name="activity_camera_intent_photo_uri_not_found">Photo uri not found!</string>
+
+    <string name="warning_camera_intent_canceled">Camera Intent was canceled by user.</string>
+
+    <string name="error_sd_card_not_mounted">External storage is required. Your SD card is most likely not mounted.</string>
+    <string name="error_could_not_take_photo">There was an issue with your camera. We are very sorry for the inconvenience!</string>
+    <string name="error_sth_went_wrong">Something went wrong. Please try again.</string>
 </resources>
