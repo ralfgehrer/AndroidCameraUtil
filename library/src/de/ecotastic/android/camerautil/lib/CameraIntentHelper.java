@@ -79,16 +79,20 @@ public class CameraIntentHelper {
      * Call to reinitialize the helpers instance state.
      */
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
-		if (savedInstanceState.containsKey(DATE_CAMERA_INTENT_STARTED_STATE)) {
-			dateCameraIntentStarted = DateParser.stringToDate(savedInstanceState.getString(DATE_CAMERA_INTENT_STARTED_STATE));
-		}
-		if (savedInstanceState.containsKey(CAMERA_PIC_URI_STATE)) {
-			preDefinedCameraUri = Uri.parse(savedInstanceState.getString(CAMERA_PIC_URI_STATE));
-		}
-		if (savedInstanceState.containsKey(PHOTO_URI_STATE)) {
-			photoUri = Uri.parse(savedInstanceState.getString(PHOTO_URI_STATE));
-		}
-		rotateXDegrees = savedInstanceState.getInt(ROTATE_X_DEGREES_STATE);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(DATE_CAMERA_INTENT_STARTED_STATE)) {
+                dateCameraIntentStarted = DateParser.stringToDate(savedInstanceState.getString(DATE_CAMERA_INTENT_STARTED_STATE));
+            }
+            if (savedInstanceState.containsKey(CAMERA_PIC_URI_STATE)) {
+                preDefinedCameraUri = Uri.parse(savedInstanceState.getString(CAMERA_PIC_URI_STATE));
+            }
+            if (savedInstanceState.containsKey(PHOTO_URI_STATE)) {
+                photoUri = Uri.parse(savedInstanceState.getString(PHOTO_URI_STATE));
+            }
+            if (savedInstanceState.containsKey(ROTATE_X_DEGREES_STATE)) {
+                rotateXDegrees = savedInstanceState.getInt(ROTATE_X_DEGREES_STATE);
+            }
+        }
 	}
 
 	/**

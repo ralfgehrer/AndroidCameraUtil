@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * A helper class to conveniently alter Bitmap data
+ * A helper class to conveniently alter Bitmap data.
  * 
  * @author Ralf Gehrer <ralf@ecotastic.de>
  */
