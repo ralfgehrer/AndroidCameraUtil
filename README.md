@@ -1,7 +1,7 @@
 Android Camera Util
 ===================
 
-<h1>Introduction</h1>
+<h2>Introduction</h2>
 It seems to be the simplest thing in the world: taking a picture within your Android app using the default camera activity. However, there are many pitfalls which are covered in several posts across the web as, for instance, null intents being passed back, the orientation of the picture not being correct or OutOfMemoryErrors. Finally, I managed to get it working on a wide variety of devices (see list below) and I wanted to share my solution with you. The code is partially based on the following posts:
 
 * [Camera Force Closing issue in Samsung Galaxy S3 version 4.1.1](http://stackoverflow.com/questions/14495304/camera-force-closing-issue-in-samsung-galaxy-s3-version-4-1-1)
@@ -9,13 +9,13 @@ It seems to be the simplest thing in the world: taking a picture within your And
 
 I tried hard to avoid implementing different strategies based on the device configuration (e.g. manufacturer, model, ...). Unfortunately, I did not get around it. Going through hundreds of posts and talking to several developers, nobody found a solution that works on all devices without implementing device configuration specific code.
 
-<h1>Code related notes</h1>
+<h2>Code related notes</h2>
 Please feel free to check out the code and test it on your devices. The [CameraIntentHelper](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/library/src/de/ecotastic/android/camerautil/lib/CameraIntentHelper.java) class provides the main functionality.
 
 [CameraIntentActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/sample/src/de/ecotastic/android/camerautil/sample/CameraIntentActivity.java) within the sample package is an example Activity on how to implement the CameraIntentHelper. [CameraIntentFragment](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/sample/src/de/ecotastic/android/camerautil/sample/CameraIntentFragment.java) held by the [ParentActivity](https://github.com/ralfgehrer/AndroidCameraUtil/blob/master/sample/src/de/ecotastic/android/camerautil/sample/ParentActivity.java) showcases the CameraIntentHelper implementation within a Fragment.
 
 
-<h1>List of tested devices</h1>
+<h2>List of tested devices</h2>
 The code was _successfully_ tested on the following devices with Android API-Level >= 8 and stock Android.
 
 * Acer Liquid Z3 (Z130)
